@@ -5,10 +5,12 @@ require('dotenv').config();
 const express = require('express'); // Web framework for Node.js
 const dotenv = require('dotenv'); // Loads environment variables from a .env file
 const mongoose = require('./configs/mongoose'); // MongoDB config file is called to initiate DB connection
+const expressLayouts=require('express-ejs-layouts')
 
 
 // Create an instance of the Express application
 const app = express();
+app.use(expressLayouts)
 
 // Use middleware to parse incoming requests
 app.use(express.json()); // Parse JSON requests
