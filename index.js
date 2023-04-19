@@ -4,7 +4,7 @@ require('dotenv').config();
 // Import required modules
 const express = require('express'); // Web framework for Node.js
 const dotenv = require('dotenv'); // Loads environment variables from a .env file
-const mongoose = require('./config/mongoose'); // MongoDB config file is called to initiate DB connection
+const mongoose = require('./configs/mongoose'); // MongoDB config file is called to initiate DB connection
 
 
 // Create an instance of the Express application
@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // Import and use routes defined in separate modules
-app.use('/', require('./routes'));
+// app.use('/', require('./routes'));
 
 // Start the server
 const port = process.env.PORT || 8000; // Use the port defined in the environment variable, or default to port 8000
