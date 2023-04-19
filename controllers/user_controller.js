@@ -1,3 +1,5 @@
 module.exports.profile=(req,res)=>{
-    return res.send('<h1>Profile</h1>')
+    return res.render('user_profile',{
+        title: "Social App / Profile"
+    })
 }
