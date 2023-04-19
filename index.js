@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // Import and use routes defined in separate modules
-// app.use('/', require('./routes'));
+app.use('/', require('./routes'));
 
 // Start the server
 const port = process.env.PORT || 8000; // Use the port defined in the environment variable, or default to port 8000

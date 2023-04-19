@@ -3,6 +3,6 @@ const express=require('express')
 const router=express.Router()
 
 //Any request coming to "/" will be handled by home.js router 
-router.use('/',require('./home.js'))
+router.use('/',require('./home'))
 
 module.exports=router
