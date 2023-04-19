@@ -5,7 +5,7 @@ require('dotenv').config();
 const express = require('express'); // Web framework for Node.js
 const mongoose = require('./configs/mongoose'); // MongoDB config file is called to initiate DB connection
 const expressLayouts=require('express-ejs-layouts')
-
+const cookieParser=require('cookie-parser')
 
 // Create an instance of the Express application
 const app = express();
@@ -16,6 +16,7 @@ app.set('layout extractScripts',true)
 // Use middleware to parse incoming requests
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
+app.use(cookieParser())
 
 // Serve static files from the 'assets' directory
 app.use(express.static('./assets'));
