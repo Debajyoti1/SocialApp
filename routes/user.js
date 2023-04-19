@@ -1,10 +1,8 @@
 // Require the express module and create a new router object
 const express=require('express')
 const router=express.Router()
+const userController=require('../controllers/user_controller')
 
-//Any request coming to "/" will be handled by home.js router 
-router.use('/',require('./home'))
-
-router.use('/user',require('./user'))
+router.get('/profile',userController.profile)
 
 module.exports=router
