@@ -6,6 +6,9 @@ const express = require('express'); // Web framework for Node.js
 const mongoose = require('./configs/mongoose'); // MongoDB config file is called to initiate DB connection
 const expressLayouts=require('express-ejs-layouts')
 const cookieParser=require('cookie-parser')
+const session=require('express-session')
+const passport=require('passport')
+const passportLocal=require('./configs/passport-local-strategy')
 
 // Create an instance of the Express application
 const app = express();
@@ -17,6 +20,19 @@ app.set('layout extractScripts',true)
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
 app.use(cookieParser())
+app.use(session({
+  name: 'SocialApp',
+  secret: process.env.SECRET || 'sample-secret123',
+  saveUninitialized: false,
+  resave: false,
+  cookie: {
+    maxAge: 1000*3660*24 //24 hours
+  }
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(passport.setAuthenticatedUser)
 
 // Serve static files from the 'assets' directory
 app.use(express.static('./assets'));

@@ -36,5 +36,5 @@ module.exports.create = async (req, res) => {
 }
 
 module.exports.createSession = (req, res) => {
-
+    return res.redirect('/')
 }
