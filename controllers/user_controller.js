@@ -7,12 +7,18 @@ module.exports.profile = (req, res) => {
 }
 
 module.exports.signup = (req, res) => {
+    if(req.isAuthenticated()){
+        return res.redirect('/user/profile')
+    }
     return res.render('user_sign_up', {
         title: "Social App/ Signup"
     })
 }
 
 module.exports.signin = (req, res) => {
+    if(req.isAuthenticated()){
+        return res.redirect('/user/profile')
+    }
     return res.render('user_sign_in', {
         title: "Social App/ Signin"
     })
@@ -36,5 +42,12 @@ module.exports.create = async (req, res) => {
 }
 
 module.exports.createSession = (req, res) => {
+    return res.redirect('/')
+}
+
+module.exports.destroySession=(req,res)=>{
+    req.logout((err)=>{
+        console.log(err);
+    })
     return res.redirect('/')
 }

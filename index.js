@@ -9,6 +9,7 @@ const cookieParser=require('cookie-parser')
 const session=require('express-session')
 const passport=require('passport')
 const passportLocal=require('./configs/passport-local-strategy')
+const MongoStore=require('connect-mongo')
 
 // Create an instance of the Express application
 const app = express();
@@ -27,7 +28,12 @@ app.use(session({
   resave: false,
   cookie: {
     maxAge: 1000*3660*24 //24 hours
-  }
+  },
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGOOSE_URI,
+    autoremove: 'disabled',
+    ttl: 14 * 24 * 60 * 60
+  })
 }))
 
 app.use(passport.initialize())
