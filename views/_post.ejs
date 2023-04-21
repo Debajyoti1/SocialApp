@@ -1,0 +1,17 @@
+<div class="post-list">
+    <ul>
+        <%for (post of posts){%>
+
+            <li>
+                <p><%=post.content%>
+                    <small><%=post.user.name%></small>
+                    <% if (locals.user && locals.user.id==post.user.id) { %>
+                    <small><a href="/post/destroy/<%=post.id%>">Delete</a></small>
+                    <%}%>
+                </p>
+                <%- include('_comment'); %>
+            </li>
+            
+        <%}%>
+    </ul>
+</div>
