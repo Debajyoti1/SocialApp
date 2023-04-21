@@ -21,11 +21,18 @@
                 <div class="post-comment">
                     <%if (locals.user){%>
                         <form action="/comment/create" method="post">
-                            <input type="text" name="content" placeholder="Type Here to comment...">
+                            <input type="text" name="content" placeholder="Type Here to comment..." required>
                             <input type="hidden" name="post" value="<%=post._id%>">
                             <button type="submit">Comment</button>
                         </form>
                     <%}%>
+                </div>
+                <div class="post-comment-list">
+                    <ul>
+                        <% for (comment of post.comment) { %>
+                            <li><%=comment.content%> <%=comment.user.name%></li>
+                        <%}%> 
+                    </ul>
                 </div>
             </li>
             
