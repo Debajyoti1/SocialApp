@@ -1,0 +1,12 @@
+#main{
+    display: flex;
+    padding: 2em;
+}
+#feed-post{
+    width: 80%;
+}
+#user-friends{
+    width: 20%;
+    padding-left: 1rem;
+    border-left: 1px solid gainsboro;
+}
