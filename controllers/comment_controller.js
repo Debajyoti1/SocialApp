@@ -10,7 +10,7 @@ module.exports.create = async (req, res) => {
                 user: req.user._id,
                 post: req.body.post
             })
-        existingPost.comments.push(newComment)
+        existingPost.comment.push(newComment)
         existingPost.save()
         }
         res.redirect('/')
