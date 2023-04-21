@@ -3,3 +3,34 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    width: 100vw;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    background-color: blue;
+    color: white;
+}
+
+header ul{
+    list-style: none;
+}
+header ul li{
+    display: inline-block;
+    padding-right: 10px;
+    font-size: 1.3rem;
+}
+#nav{
+    display: flex;
+    justify-content: flex-end;
+    width: 80%;
+    align-items: center;
+}
+#nav ul li a{
+    color: white;
+    text-decoration: none;
+}
+#app-title{
+    margin-left: 10px;
+}
