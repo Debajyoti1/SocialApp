@@ -1,26 +1,28 @@
-const Post=require('../models/post')
+const Post = require('../models/post')
+const User = require('../models/user')
 
-module.exports.home=async (req,res)=>{
+module.exports.home = async (req, res) => {
     // console.log(req.cookies);
     // res.cookie('b','c')
-    try{
-    const posts=await Post.find({})
-    .populate('user')
-    .populate({
-        path: 'comment',
-        populate: {
-            path: 'user'
-        }
-    })
-    return res.render('home',{
-        title: "Home",
-        posts: posts
-    })
+    try {
+        const allUsers = await User.find({})
+        const posts = await Post.find({})
+            .populate('user')
+            .populate({
+                path: 'comment',
+                populate: {
+                    path: 'user'
+                }
+            })
+        return res.render('home', {
+            title: "Home",
+            posts: posts
+        })
     }
-    catch(err){
+    catch (err) {
         console.log(err);
     }
-    return res.render('home',{
+    return res.render('home', {
         title: "Home",
         posts: {}
     })
