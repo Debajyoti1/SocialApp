@@ -1,13 +1,24 @@
 const User = require('../models/user')
 
-module.exports.profile = (req, res) => {
-    return res.render('user_profile', {
-        title: "Social App / Profile"
-    })
+module.exports.profile = async (req, res) => {
+    try {
+        const existingUser = await User.findById(req.params.id)
+        return res.render('user_profile', {
+            title: "Social App / Profile",
+            profile_user: existingUser
+        })
+    } catch (err) {
+        console.log(err);
+        return res.render('user_profile', {
+            title: "Social App / Profile",
+            profile_user: {}
+        })
+    }
+
 }
 
 module.exports.signup = (req, res) => {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         return res.redirect('/user/profile')
     }
     return res.render('user_sign_up', {
@@ -16,7 +27,7 @@ module.exports.signup = (req, res) => {
 }
 
 module.exports.signin = (req, res) => {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         return res.redirect('/user/profile')
     }
     return res.render('user_sign_in', {
@@ -45,8 +56,8 @@ module.exports.createSession = (req, res) => {
     return res.redirect('/')
 }
 
-module.exports.destroySession=(req,res)=>{
-    req.logout((err)=>{
+module.exports.destroySession = (req, res) => {
+    req.logout((err) => {
         console.log(err);
     })
     return res.redirect('/')

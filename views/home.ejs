@@ -12,5 +12,10 @@
     <%- include('_post'); %>
 </section>
 <section id="user-friends">
-    
+    <h4>Friends</h4>
+    <% for (user of all_user) { %>
+        <p>
+            <a href="/user/profile/<%= user.id %>"><%= user.name %></a>
+        </p>
+    <% } %>
 </section>
