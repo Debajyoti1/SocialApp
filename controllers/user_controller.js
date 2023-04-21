@@ -17,6 +17,19 @@ module.exports.profile = async (req, res) => {
 
 }
 
+module.exports.update = async (req, res) => {
+    try {
+        if (req.user.id == req.params.id) {
+            await User.findByIdAndUpdate(req.params.id, { name: req.body.name, email: req.body.email })
+        }
+        return res.redirect('back')
+    }
+    catch (err) {
+        console.log(err);
+        return res.redirect('back')
+    }
+}
+
 module.exports.signup = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/user/profile')

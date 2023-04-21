@@ -1,21 +1,22 @@
 <link rel="stylesheet" href="/css/home.css" type="text/css">
 <h1>Social App</h1>
-
-<section id="feed-post">
-    <h4>Posts</h4>
-    <% if (locals.user) {%>
-    <form action="/post/create" id="new-post-form" method="post">
-        <textarea name="content" placeholder="Type Here..." cols="30" rows="5"></textarea>
-        <button type="submit">Post</button>
-    </form>
-    <%}%>
-    <%- include('_post'); %>
-</section>
-<section id="user-friends">
-    <h4>Friends</h4>
-    <% for (user of all_user) { %>
-        <p>
-            <a href="/user/profile/<%= user.id %>"><%= user.name %></a>
-        </p>
-    <% } %>
-</section>
+<div id="main">
+    <section id="feed-post">
+        <h4>Posts</h4>
+        <% if (locals.user) {%>
+        <form action="/post/create" id="new-post-form" method="post">
+            <textarea name="content" placeholder="Type Here..." cols="30" rows="5"></textarea>
+            <button type="submit">Post</button>
+        </form>
+        <%}%>
+        <%- include('_post'); %>
+    </section>
+    <section id="user-friends">
+        <h4>Friends</h4>
+        <% for (user of all_user) { %>
+            <p>
+                <a href="/user/profile/<%= user.id %>"><%= user.name %></a>
+            </p>
+        <% } %>
+    </section>
+</div>
