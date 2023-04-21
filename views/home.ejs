@@ -17,6 +17,9 @@
             <li>
                 <p><%=post.content%>
                     <small><%=post.user.name%></small>
+                    <% if (locals.user && locals.user.id==post.user.id) { %>
+                    <small><a href="/post/destroy/<%=post.id%>">Delete</a></small>
+                    <%}%>
                 </p>
                 <div class="post-comment">
                     <%if (locals.user){%>
