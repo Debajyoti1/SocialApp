@@ -8,3 +8,16 @@
         <button type="submit">Post</button>
     </form>
 </section>
+<div class="post-list">
+    <ul>
+        <%for (post of posts){%>
+
+            <li>
+                <p><%=post.content%>
+                    <small><%=post.user.name%></small>
+                </p>
+            </li>
+            
+        <%}%>
+    </ul>
+</div>
