@@ -10,6 +10,7 @@ const session=require('express-session')
 const passport=require('passport')
 const passportLocal=require('./configs/passport-local-strategy')
 const MongoStore=require('connect-mongo')
+const flash=require('connect-flash')
 
 // Create an instance of the Express application
 const app = express();
@@ -39,7 +40,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(passport.setAuthenticatedUser)
-
+app.use(flash())
 // Serve static files from the 'assets' directory
 app.use(express.static('./assets'));
 
