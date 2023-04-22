@@ -4,17 +4,21 @@ const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
 
 passport.use(new LocalStrategy({
-    usernameField: 'email'
-}, async (email, password, done) => {
+    usernameField: 'email',
+    passReqToCallback: true
+}, async (req,email, password, done) => {
     try {
+
         const existingUser = await User.findOne({ email: email })
         if (!existingUser || existingUser.password != password) {
+            req.flash('error','Invalid credentials')
             return done(null, false)
         }
         return done(null, existingUser)
     }
     catch (err) {
         console.log(err);
+        req.flash('error','Invalid credentials')
         done(err)
     }
 }
