@@ -14,6 +14,7 @@
                     console.log(data);
                     let newPost=newPostDom(data.data.post)
                     $('.post-list>ul').prepend(newPost)
+                    deletePost($(' .delete-post-button',newPost))
                 },
                 error: (error) => {
                     console.log(error.resposeText);
@@ -27,7 +28,7 @@
             <li id="post-id-${post._id}">
             <p>${post.content}
                 <small>${post.user.name}</small>
-                <small><a class="delete-post-button" href="/post/destroy/${post.id}">Delete</a></small>
+                <small><a class="delete-post-button" href="/post/destroy/${post._id}">Delete</a></small>
             </p>
                 <div class="post-comment-add">
                     <form action="/comment/create" method="post">
@@ -42,4 +43,29 @@
 
     createtPost()
 
+    //method to delete a post from DOM
+    let deletePost=(deleteLink)=>{
+        $(deleteLink).click((e)=>{
+            e.preventDefault()
+
+            $.ajax({
+                type: 'get',
+                url: $(deleteLink).prop('href'),
+                success: (data)=>{
+                    // console.log(data);
+                    $(`#post-id-${data.data}`).remove()
+                },
+                error: (error)=>{
+                    console.log(error.resposeText);
+                }
+            })
+        })
+    }
+
+    //Adding the deletePost function to all a links
+    $(' .delete-post-button').each((index,element)=> {
+        deletePost($(element))
+      });
+
 }
+
