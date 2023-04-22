@@ -1,4 +1,6 @@
 const User = require('../models/user')
+const fs=require('fs')
+const path=require('path')
 
 module.exports.profile = async (req, res) => {
     try {
@@ -18,15 +20,26 @@ module.exports.profile = async (req, res) => {
 }
 
 module.exports.update = async (req, res) => {
+
     try {
         if (req.user.id == req.params.id) {
-            await User.findByIdAndUpdate(req.params.id, { name: req.body.name, email: req.body.email })
-            req.flash('success', 'Profile updated successfully!')
+            const existingUser = await User.findById(req.params.id)
+            User.uploadAvatar(req,res,(err)=>{
+                existingUser.name=req.body.name
+                existingUser.email=req.body.email
+    
+                if(req.file){
+                    if (existingUser.avatar && fs.existsSync(path.join(__dirname,'..',existingUser.avatar))){
+                        fs.unlinkSync(path.join(__dirname,'..',existingUser.avatar))
+                    }
+                    existingUser.avatar=User.avatarPath+'/'+req.file.filename
+                }
+                existingUser.save()
+            })
+
         }
-        else { req.flash('error', 'Profile updated failed!') }
         return res.redirect('back')
-    }
-    catch (err) {
+    } catch (err) {
         console.log(err);
         req.flash('error', 'Profile updated failed!')
         return res.redirect('back')

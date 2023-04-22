@@ -45,7 +45,8 @@ app.use(flash())
 app.use(customMiddleware.setFlash)
 
 // Serve static files from the 'assets' directory
-app.use(express.static('./assets'));
+app.use(express.static('./assets'))
+app.use('/upload',express.static(__dirname+'/upload'))
 
 // Set the view engine to 'ejs' and specify the directory for views
 app.set('view engine', 'ejs');
