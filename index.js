@@ -9,9 +9,11 @@ const cookieParser=require('cookie-parser')
 const session=require('express-session')
 const passport=require('passport')
 const passportLocal=require('./configs/passport-local-strategy')
+const passportJWT=require('./configs/passport-jwt-strategy')
 const MongoStore=require('connect-mongo')
 const flash=require('connect-flash')
 const customMiddleware=require('./configs/middleware')
+const passportGoogle = require('./configs/passport-google-oauth2-strategy')
 
 // Create an instance of the Express application
 const app = express();
