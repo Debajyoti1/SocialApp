@@ -1,9 +1,14 @@
 const Comment = require('../models/comment')
 const Post = require('../models/post')
+const commentMailer=require('../mailer/comment_mailer')
 
 module.exports.create = async (req, res) => {
     try {
-        const existingPost = await Post.findById(req.body.post)
+        const existingPost = await Post.findById(req.body.post).populate({
+            path: 'user',
+            select: '-password'
+        })
+        // console.log(existingPost);
         if (existingPost) {
             const newComment = await Comment.create({
                 content: req.body.content,
@@ -12,6 +17,7 @@ module.exports.create = async (req, res) => {
             })
             existingPost.comment.push(newComment)
             existingPost.save()
+            // commentMailer.newComment(existingPost)
         }
         res.redirect('/')
     }
