@@ -38,3 +38,10 @@ header ul li{
     /* margin-left: 10px; */
     width: 20%;
 }
+
+/* .post-list ul>li{
+    margin-top: 1rem;
+} */
+.each-post{
+    margin-top: 1.5rem;
+}

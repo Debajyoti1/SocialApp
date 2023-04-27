@@ -2,7 +2,7 @@
     <ul>
         <%for (post of posts){%>
 
-            <li id="post-id-<%= post._id %>">
+            <li id="post-id-<%= post._id %>" class="each-post">
                 <p><%=post.content%>
                     <small><%=post.user.name%></small>
                     <% if (locals.user && locals.user.id==post.user.id) { %>

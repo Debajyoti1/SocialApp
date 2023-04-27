@@ -1,6 +1,8 @@
 const Comment = require('../models/comment')
 const Post = require('../models/post')
 const commentMailer=require('../mailer/comment_mailer')
+const commentEmailWorker=require('../workers/comment-email-worker')
+const queue=require('../configs/kue')
 
 module.exports.create = async (req, res) => {
     try {
@@ -18,6 +20,9 @@ module.exports.create = async (req, res) => {
             existingPost.comment.push(newComment)
             existingPost.save()
             // commentMailer.newComment(existingPost)
+            let job = queue.create('emails',newComment).save()
+            // console.log('kue here');
+            // console.log(job.id);
         }
         res.redirect('/')
     }
