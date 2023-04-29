@@ -7,7 +7,8 @@ module.exports.toggleLike= async (req,res)=>{
         let likeable
         let deleted=false
         if(req.query.type=='Post'){
-            likeable= await Post.findById(req.query.id).populate('likes')
+            likeable= await Post.findById(req.query.id).populate('like')
+            // console.log(likeable);
         }
         else{
             likeable= await Comment.findById(req.query.id)
@@ -18,10 +19,12 @@ module.exports.toggleLike= async (req,res)=>{
             onModel: req.query.type,
             user: req.user._id
         })
+        // console.log(existingLike);
         if(existingLike){
             likeable.like.pull(existingLike._id)
             likeable.save()
-            Like.deleteOne({id: existingLike._id})
+            console.log(existingLike._id);
+            await Like.deleteOne({_id: existingLike.id})
             deleted=true
         }
         else{
@@ -32,6 +35,7 @@ module.exports.toggleLike= async (req,res)=>{
             })
             likeable.like.push(newLike)
             likeable.save()
+            // console.log(likeable);
         }
         return res.status(200).json({
             message: 'Request successful',
