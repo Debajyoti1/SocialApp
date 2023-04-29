@@ -18,7 +18,9 @@
                 <a class="toggle-like-button" data-likes="<%= comment.like.length%>" href="/like/toggle/?id=<%=comment._id%>&type=Comment">
                     <%= comment.like.length %> Likes
                 </a>
-            <% } %>
+            <%} else {%>
+                <%= comment.like.length %> Likes
+            <%}%>
         <%}%> 
     </ul>
 </div>
