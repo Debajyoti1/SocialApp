@@ -30,6 +30,9 @@
                 <small>${post.user.name}</small>
                 <small><a class="delete-post-button" href="/post/destroy/${post._id}">Delete</a></small>
             </p>
+            <a class="toggle-like-button" data-likes="0" href="/like/toggle/?id=<%=post._id%>&type=Post">
+            0 Likes
+            </a>
                 <div class="post-comment-add">
                     <form action="/comment/create" method="post">
                         <input type="text" name="content" placeholder="Type Here to comment..." required>

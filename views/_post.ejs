@@ -4,7 +4,12 @@
 
             <li id="post-id-<%= post._id %>" class="each-post">
                 <p><%=post.content%>
-                    <small><%=post.user.name%></small>
+                    <small><%=post.user.name%></small><br>
+                    <% if (locals.user){ %>
+                        <a class="toggle-like-button" data-likes="<%= post.like.length%>" href="/like/toggle/?id=<%=post._id%>&type=Post">
+                            <%= post.like.length %> Likes
+                        </a>
+                    <% } %>
                     <% if (locals.user && locals.user.id==post.user.id) { %>
                     <small><a class="delete-post-button" href="/post/destroy/<%=post.id%>">Delete</a></small>
                     <%}%>

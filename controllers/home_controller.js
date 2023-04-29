@@ -13,8 +13,12 @@ module.exports.home = async (req, res) => {
                 path: 'comment',
                 populate: {
                     path: 'user'
+                },
+                populate: {
+                    path: 'like'
                 }
             })
+            .populate('like')
         return res.render('home', {
             title: "Home",
             posts: posts,

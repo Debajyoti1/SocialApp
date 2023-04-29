@@ -1,5 +1,6 @@
 const Comment = require('../models/comment')
 const Post = require('../models/post')
+const Like = require('../models/like')
 const commentMailer=require('../mailer/comment_mailer')
 const commentEmailWorker=require('../workers/comment-email-worker')
 const queue=require('../configs/kue')
@@ -39,6 +40,7 @@ module.exports.destroy = async (req, res) => {
             const existingPost = await Post.findById(existingComment.post)
             Post.findByIdAndUpdate(existingComment.post, { $pull: { comment: req.params.id } })
             await Comment.deleteOne({ _id: existingComment.id })
+            await Like.deleteMany({likeable: existingComment._id, onModel: 'Comment'})
         }
         return res.redirect('/')
     }

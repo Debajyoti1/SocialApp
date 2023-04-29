@@ -14,6 +14,11 @@
             <% if (locals.user && locals.user.id==comment.user.id) { %>
                 <small><a href="/comment/destroy/<%=comment.id%>">Delete</a></small>
             <%}%>
+            <% if (locals.user){ %>
+                <a class="toggle-like-button" data-likes="<%= comment.like.length%>" href="/like/toggle/?id=<%=comment._id%>&type=Comment">
+                    <%= comment.like.length %> Likes
+                </a>
+            <% } %>
         <%}%> 
     </ul>
 </div>
